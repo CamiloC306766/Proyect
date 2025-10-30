@@ -6,6 +6,7 @@ const clientRoutes = require('./Client/routes');
 const productRoutes = require('./Product/routes');
 const mailerRoutes = require('./nodeMailer/routes');
 const valorantRoutes = require('./Valorant/routes');
+const csvRoutes = require("./csvtoJson/routes")
 //const { FORCE } = require('sequelize/lib/app-hints');
 
 
@@ -21,7 +22,8 @@ app.use(express.json());
 app.use('/api/clients', clientRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/mailer', mailerRoutes);
-app.use('/api/valorant',valorantRoutes)
+app.use('/api/valorant',valorantRoutes);
+app.use("/csv", csvRoutes);
 
 //Conectar a MySQL y sincronizar modelos
 sequelize.sync({ alter: true }) //  ajusta las columnas automáticamente
