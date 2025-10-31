@@ -1,4 +1,5 @@
 const { convertCSVFile } = require("./csvToJson.services");
+const transformData = require("../config/transformCsvToJson")
 
 const uploadCSV = async (req, res) => {
   try {
@@ -6,7 +7,9 @@ const uploadCSV = async (req, res) => {
       return res.status(400).json({ message: "Archivo CSV requerido" });
     }
 
-    const data = await convertCSVFile(req.file.path);
+    const rawData = await convertCSVFile(req.file.path);
+
+    const data = transformData(rawData)
 
     res.json({
       success: true,
