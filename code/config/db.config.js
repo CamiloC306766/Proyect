@@ -2,6 +2,14 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize'); 
 
+if (process.env.NODE_ENV === "test") {
+  console.log("🔧 DB Mock Mode — no DB connection in tests");
+  module.exports = {
+    define: () => {}
+  };
+  return;
+}
+
 const sequelize = new Sequelize(
   process.env.DB_NAME,     // nombre de la base de datos
   process.env.DB_USER,     // usuario

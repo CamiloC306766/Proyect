@@ -26,16 +26,19 @@ app.use('/api/valorant',valorantRoutes);
 app.use("/csv", csvRoutes);
 
 //Conectar a MySQL y sincronizar modelos
-sequelize.sync({ alter: true }) //  ajusta las columnas automáticamente
-  .then(() => console.log(' Base de datos sincronizada con el modelo'))
-  .catch(err => console.error(' Error al sincronizar:', err));
+if (process.env.NODE_ENV !== "test") {
+  sequelize.sync({ alter: true })
+    .then(() => console.log(' Base de datos sincronizada con el modelo'))
+    .catch(err => console.error(' Error al sincronizar:', err));
 
-
-//Iniciar el servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+    //Iniciar el servidor
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+  });
+}
 
-});
+
+
 
 module.exports = app
