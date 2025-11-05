@@ -5,7 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha Test/*.test.js",
-    "start": "node index.js"
+    "start": "nodemon index.js",
+    "coverage": "nyc npm test"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "exclude": [
+      "Test",
+      "node_modules"
+    ]
   },
   "keywords": [
     "node",
@@ -22,12 +34,14 @@
     "multer": "^2.0.2",
     "mysql2": "^3.15.2",
     "nodemailer": "^7.0.9",
+    "nodemon": "^3.1.10",
     "route": "^0.2.5",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "jest": "^30.2.0",
     "mocha": "^11.7.4",
+    "nyc": "^17.1.0",
     "sinon": "^21.0.0",
     "supertest": "^7.1.4"
   }
